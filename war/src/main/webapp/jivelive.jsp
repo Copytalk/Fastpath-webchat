@@ -4,6 +4,8 @@
 // http://www.jivesoftware.com
 //=====================
 <%@ include file="common.js" %>
+<%@ page import="org.jivesoftware.webchat.util.ParamUtils" %>
+<%@ page import="java.util.*"%>
 
 <%
  String urls = request.getRequestURL().toString();
@@ -12,13 +14,22 @@
  if (indexs != -1) {
   urls = urls.substring( 0, indexs );
  }
+ 
+ String userParam = ParamUtils.getParameter(request,"user");
+ if(userParam != null)
+ {
+ 	session.setAttribute("user", userParam);
+ }
+ else{userParam = "Unknown";}
 %>
+
+
 
   function showChatButton(workgroup) {
     var d = new Date();
     var v1 = d.getSeconds() + '' + d.getDay();
     var img = "<%=urls %>/live?action=isAvailable&workgroup=" + workgroup;
-    var gotoURL = "<%= urls %>/start.jsp?workgroup=" + workgroup + "&location=" + window.location.href;
+    var gotoURL = "<%= urls %>/start.jsp?workgroup=" + workgroup + "&location=" + window.location.href + "&user=<%= userParam %>";
     document.write(
         "<a href=\"#\" onclick=\"launchWin(\'framemain\','"+gotoURL+"',500, 400);return false;\"><img border=\"0\" src=\""+img+"\"></a>");
   }

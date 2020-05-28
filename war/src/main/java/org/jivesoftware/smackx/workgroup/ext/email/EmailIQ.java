@@ -69,15 +69,16 @@ public class EmailIQ extends IQ {
     @Override
     protected IQChildElementXmlStringBuilder getIQChildElementBuilder(IQChildElementXmlStringBuilder xml) {
 
-      xml.append("<").append("send-email").append(" xmlns=\"").append("http://jivesoftware.com/protocol/workgroup").append("\">");
-      xml.append("<fromAddress>").append(StringUtils.escapeForXml(getFromAddress())).append("</fromAddress>");
+     // xml.append("<").append("send-email").append(" xmlns=\"").append("http://jivesoftware.com/protocol/workgroup").append("\">");
+      xml.append(">");
+    	xml.append("<fromAddress>").append(StringUtils.escapeForXml(getFromAddress())).append("</fromAddress>");
       xml.append("<toAddress>").append(StringUtils.escapeForXml(getToAddress())).append("</toAddress>");
       xml.append("<subject>").append(StringUtils.escapeForXml(getSubject())).append("</subject>");
       xml.append("<message>").append(StringUtils.escapeForXml(getMessage())).append("</message>");
       xml.append("<useHTML>").append(Boolean.toString(isHtml())).append("</useHTML>");
            if (getSessionID() != null)
             xml.append("<sessionID>").append(getSessionID()).append("</sessionID>");
-           xml.append("</").append("send-email").append("> ");
+           //xml.append("</").append("send-email").append("> ");
            return xml;
     }
     

@@ -56,15 +56,17 @@
         }
         catch (XMPPErrorException xe) {
             // If anonymous login disabled.
+            
             if (xe.getXMPPError().getCondition() == XMPPError.Condition.forbidden) {
                 errors.put("connect", "Anonymous login test failed. Ensure that anonymous logins are enabled on the server.");
             }
             else {
-                errors.put("connect", "Could not connect to server. Please check that the domain and port are valid.");
+                errors.put("connect", "Could not connect to server. Please check that the domain and port are valid." + xe.getMessage());
             }
         }
         catch (Exception ex) {
-            errors.put("connect", "Could not connect to server. Please check that the domain and port are valid.");
+            
+            errors.put("connect", "Could not connect to server. Please check that the domain and port are valid."  + ex.getMessage());
         }
 
         // Continue if there were no errors
@@ -85,7 +87,8 @@
     if (!doSave) {
         // If the domain is still blank, guess at the value:
         if (domain == null) {
-            domain = InetAddress.getLocalHost().getHostName().toLowerCase();
+            //domain = InetAddress.getLocalHost().getHostName().toLowerCase();
+            domain = "108.9.170.174";
         }
     }
 %>

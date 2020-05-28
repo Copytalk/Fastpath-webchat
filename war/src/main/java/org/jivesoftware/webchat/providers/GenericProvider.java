@@ -14,6 +14,7 @@ package org.jivesoftware.webchat.providers;
 import org.jivesoftware.webchat.util.StringUtils;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -96,6 +97,8 @@ public class GenericProvider implements MetaDataProvider {
         // Retrieve reserved words
         String email = request.getParameter("email");
         String username = request.getParameter("username");
+        HttpSession session = request.getSession(false);
+        username = (String) session.getAttribute("user");
         String question = request.getParameter("question");
         String agent = request.getParameter("agent");
         product = getString(request.getParameter("product"));
