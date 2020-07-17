@@ -98,7 +98,8 @@ public class GenericProvider implements MetaDataProvider {
         String email = request.getParameter("email");
         String username = request.getParameter("username");
         HttpSession session = request.getSession(false);
-        username = (String) session.getAttribute("user");
+        String sessionUser =(String) session.getAttribute("user"); 
+        if(sessionUser != null) username = sessionUser;
         String question = request.getParameter("question");
         String agent = request.getParameter("agent");
         product = getString(request.getParameter("product"));

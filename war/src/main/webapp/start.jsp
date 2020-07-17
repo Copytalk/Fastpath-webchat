@@ -47,6 +47,15 @@
         session.setAttribute("pageLocation", pageLocation);
     }
 
+    //check session
+    String username = ParamUtils.getParameter(request, "username");
+    if(username != null)
+    {
+    	session.setAttribute("user", username);	
+    	paramString.append("&username="+username);
+    	
+    }
+    
     if (WorkgroupStatus.isOnline(workgroup)) {
         if (noUI) {
             Enumeration requestEnum = request.getParameterNames();
