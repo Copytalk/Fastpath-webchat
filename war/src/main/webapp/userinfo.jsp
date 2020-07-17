@@ -40,7 +40,20 @@
     Jid workgroupJid = JidCreate.from(workgroup);
     
     Workgroup chatWorkgroup = WorkgroupStatus.getWorkgroup(workgroupJid);
-    if (!chatWorkgroup.isAvailable()) {
+    int tryCount = 0;
+    boolean workGroupAvailable = false;
+    boolean hasBeenSet = false;
+    while(tryCount < 2 && !hasBeenSet) {
+    	try{
+    		workGroupAvailable = chatWorkgroup.isAvailable();
+        	hasBeenSet = true;
+        }
+        catch(Exception ee) {
+        	tryCount+=1;	
+        }	
+    }
+    
+    if (!workGroupAvailable) {
         response.sendRedirect("email/leave-a-message.jsp?workgroup=" + StringUtils.URLEncode(workgroup, "utf-8"));
         return;
     }
@@ -271,7 +284,7 @@
                <td class="formtext" colspan="2" height="1%" nowrap><span class="error">Authentication Failed</span></td>
             </tr>
             <% } %>
-
+<p hidden>Hello <%= (String)session.getAttribute("user") %></p>
             <%
                    List<FormField> fields = workgroupForm.getFields();
                    for (FormField field : formFields) {
