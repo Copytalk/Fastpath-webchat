@@ -46,8 +46,8 @@
 
     WorkgroupExt wgroup = new WorkgroupExt(workgroupJid, con);
     boolean isEmailConfigured = wgroup.isEmailAvailable();
-
-    if(!isEmailConfigured){
+    boolean transcriptEnabled = false;
+    if(!isEmailConfigured || !transcriptEnabled){
         response.sendRedirect("chat-ended.jsp?workgroup="+workgroup);
         return;
     }
